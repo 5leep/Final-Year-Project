@@ -17,7 +17,15 @@ frame.place(relx=0.1, rely=0.1, relwidth=0.8, relheight=0.8)
 
 # Create and pack button:
 button = tk.Button(frame, text="Test button", fg='white', bg='black')
-button.pack()
+button.pack(side='left')
+
+# Create and pack label:
+label = tk.Label(frame, text="This is a label", fg='black', bg='white')
+label.pack()
+
+# Create and pack entry:
+entry = tk.Entry(frame, bg='green')
+entry.pack()
 
 # End "loop" of interface:
 root.mainloop()
