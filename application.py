@@ -1,10 +1,10 @@
-
 # Imports:
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 
 # Begin "loop" of interface:
+
 root = tk.Tk()
 root.title('FETT - Focus Enhancement and Tracking Tool')
 root.iconbitmap('media/fet.ico')
@@ -24,28 +24,41 @@ y = (screenHeight / 2) - (appHeight / 2)
 # Formulae for centering window:
 root.geometry(f'{appWidth}x{appHeight}+{int(x)}+{int(y)}')
 
-# Create and pack canvas (window):
-canvas = tk.Canvas()
-canvas.pack()
+# Notebook init:
+notebook = ttk.Notebook(root)
+notebook.pack(pady=15)
 
-# Create and place frame (on top of, and relative to, canvas):
-frame = tk.Frame(root, bg='#77af87')
-frame.place(relx=0.01, rely=0.01, relwidth=0.98, relheight=0.98)
 
-# Create and pack START button:
-button = tk.Button(frame, text="Start", fg='white', bg='black')
-button.place(x=100, y=100)
-# Create and pack STOP button:
-button = tk.Button(frame, text="Stop", fg='white', bg='black')
-button.place(x=150, y=150)
+# hide function:
+def hide():
+    notebook.hide(1)
 
-# Create and pack label:
-label = tk.Label(frame, text="This is a label", fg='black', bg='white')
-label.pack()
+# reveal function:
+def show():
+    notebook.add(frame2, text="Statistics")
 
-# Create and pack entry:
-entry = tk.Entry(frame, bg='green')
-entry.pack()
+def select():
+    notebook.select(1)
+
+
+# Creating tabs:
+frame1 = Frame(notebook, width=screenWidth, height=screenHeight, bg="blue")
+frame2 = Frame(notebook, width=screenWidth, height=screenHeight, bg="red")
+
+# Packing tabs:
+frame1.pack(fill="both", expand=1)
+frame2.pack(fill="both", expand=1)
+
+# Adding tabs, allowing functionality and title:
+notebook.add(frame1, text="Timer")
+notebook.add(frame2, text="Statistics")
+
+# Adding hide and show buttons
+startButton = Button(frame1, text="START", command=hide).pack(pady=10)
+stopButton = Button(frame1, text="STOP", command=show).pack(pady=10)
+
+# Adding navigate button:
+navigateButton = Button(frame1, text="To tab 2", command=select).pack(pady=10)
 
 # End "loop" of interface:
 root.mainloop()
