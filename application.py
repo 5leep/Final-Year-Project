@@ -54,11 +54,11 @@ notebook.add(frame1, text="Timer")
 notebook.add(frame2, text="Statistics")
 
 # Adding hide and show buttons
-startButton = Button(frame1, text="START", command=hide).pack(pady=10)
-stopButton = Button(frame1, text="STOP", command=show).pack(pady=10)
+startButton = Button(frame1, text="START", width=15, height=5, command=hide).grid(row=2, column=2)
+stopButton = Button(frame1, text="STOP", width=15, height=5, command=show).grid(row=3, column=3)
 
 # Adding navigate button:
-navigateButton = Button(frame1, text="To tab 2", command=select).pack(pady=10)
+navigateButton = Button(frame1, text="To tab 2", command=select).grid(row=1, column=1)
 
 # End "loop" of interface:
 root.mainloop()
