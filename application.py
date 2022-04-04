@@ -2,6 +2,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+import tkinter.font as font
 
 # Begin "loop" of interface:
 
@@ -26,7 +27,7 @@ root.geometry(f'{appWidth}x{appHeight}+{int(x)}+{int(y)}')
 
 # Notebook init:
 notebook = ttk.Notebook(root)
-notebook.pack(pady=15)
+notebook.pack(pady = 15)
 
 
 # hide function:
@@ -46,19 +47,30 @@ frame1 = Frame(notebook, width=screenWidth, height=screenHeight, bg="blue")
 frame2 = Frame(notebook, width=screenWidth, height=screenHeight, bg="red")
 
 # Packing tabs:
-frame1.pack(fill="both", expand=1)
-frame2.pack(fill="both", expand=1)
+frame1.pack(fill = "both", expand = 1)
+frame2.pack(fill = "both", expand = 1)
 
 # Adding tabs, allowing functionality and title:
-notebook.add(frame1, text="Timer")
-notebook.add(frame2, text="Statistics")
+notebook.add(frame1, text = "Timer")
+notebook.add(frame2, text = "Statistics")
+
+
+# Setting up fonts:
+buttonFont1 = font.Font(family = 'Helvetica', size = 12, weight='bold')
+buttonFont2 = font.Font(family = 'Helvetica', size = 10)
+
 
 # Adding hide and show buttons
-startButton = Button(frame1, text="START", width=15, height=5, command=hide).grid(row=2, column=2)
-stopButton = Button(frame1, text="STOP", width=15, height=5, command=show).grid(row=3, column=3)
+startButton = Button(frame1, text = "START", font = buttonFont1, width = 18, height = 3, command = hide).grid(row = 2, column = 2)
+stopButton = Button(frame1, text = "STOP", font = buttonFont1, width = 18, height = 3, command = show).grid(row = 3, column = 3)
 
 # Adding navigate button:
-navigateButton = Button(frame1, text="To tab 2", command=select).grid(row=1, column=1)
+navigateButton = Button(frame1, text = "To tab 2", command = select).grid(row = 1, column = 1)
+
+# Adding exit button:
+exitButton = Button(frame1, width = 15, height = 5, text = "Exit", command = root.quit)
+exitButton.grid(row = 3, column = 4)
+
 
 # End "loop" of interface:
 root.mainloop()
