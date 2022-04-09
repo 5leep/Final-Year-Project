@@ -29,22 +29,14 @@ root.geometry(f'{appWidth}x{appHeight}+{int(x)}+{int(y)}')
 notebook = ttk.Notebook(root)
 notebook.pack(pady = 15)
 
-
-# hide function:
-def hide():
-    notebook.hide(1)
-
-# reveal function:
-def show():
-    notebook.add(frame2, text="Statistics")
-
+# Go to Statistics tab function:
 def select():
     notebook.select(1)
 
 
 # Creating tabs:
-frame1 = Frame(notebook, width=screenWidth, height=screenHeight, bg="blue")
-frame2 = Frame(notebook, width=screenWidth, height=screenHeight, bg="red")
+frame1 = Frame(notebook, width=screenWidth, height=screenHeight, bg="#6e7a74")
+frame2 = Frame(notebook, width=screenWidth, height=screenHeight, bg="white")
 
 # Packing tabs:
 frame1.pack(fill = "both", expand = 1)
@@ -56,20 +48,26 @@ notebook.add(frame2, text = "Statistics")
 
 
 # Setting up fonts:
-buttonFont1 = font.Font(family = 'Helvetica', size = 12, weight='bold')
+buttonFont1 = font.Font(family = 'Helvetica', size = 12, weight= 'bold')
 buttonFont2 = font.Font(family = 'Helvetica', size = 10)
+timerFont1 = font.Font(family = 'Helvetica', size = 40, weight = 'bold')
 
 
-# Adding hide and show buttons
-startButton = Button(frame1, text = "START", font = buttonFont1, width = 18, height = 3, command = hide).grid(row = 2, column = 2)
-stopButton = Button(frame1, text = "STOP", font = buttonFont1, width = 18, height = 3, command = show).grid(row = 3, column = 3)
+# Adding Labels:
+# Timer Label:
+timer = Label(frame1, text = "00:00", font = timerFont1).grid(row = 2, column = 3, columnspan = 1, rowspan = 1, padx=10, pady=40)
+blankLabel1 = Label(frame1, text = "             ", font = timerFont1, fg = "#6e7a74", bg = "#6e7a74").grid(row = 1, column = 1)
 
-# Adding navigate button:
-navigateButton = Button(frame1, text = "To tab 2", command = select).grid(row = 1, column = 1)
+
+# Adding start and stop buttons
+startButton = Button(frame1, text = "START", font = buttonFont1, width = 18, height = 3).grid(row = 2, column = 2, padx=10, pady=10)
+stopButton = Button(frame1, text = "STOP", font = buttonFont1, width = 18, height = 3).grid(row = 2, column = 4, padx=10, pady=10)
+
+# Adding navigate to statistics tab button:
+# navigateButton = Button(frame1, text = "To tab 2", command = select).grid(row = 1, column = 1, padx=10, pady=10)
 
 # Adding exit button:
-exitButton = Button(frame1, width = 15, height = 5, text = "Exit", command = root.quit)
-exitButton.grid(row = 3, column = 4)
+# exitButton = Button(frame1, width = 18, height = 3, padx=10, pady=10, text = "Exit", font = buttonFont1, command = root.quit).grid(row = 3, column = 4)
 
 
 # End "loop" of interface:
