@@ -3,6 +3,8 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 import tkinter.font as font
+from tkinter.ttk import Style
+
 
 # Begin "loop" of interface:
 
@@ -48,20 +50,26 @@ notebook.add(frame2, text = "Statistics")
 
 
 # Setting up fonts:
-buttonFont1 = font.Font(family = 'Helvetica', size = 12, weight= 'bold')
+# buttonFont1 = font.Font(family = 'Helvetica', size = 12, weight= 'bold')
 buttonFont2 = font.Font(family = 'Helvetica', size = 10)
-timerFont1 = font.Font(family = 'Helvetica', size = 40, weight = 'bold')
+timerFont1 = font.Font(family = 'Calibri', size = 40, weight = 'bold')
 
 
 # Adding Labels:
 # Timer Label:
-timer = Label(frame1, text = "00:00", font = timerFont1).grid(row = 2, column = 3, columnspan = 1, rowspan = 1, padx=10, pady=40)
-blankLabel1 = Label(frame1, text = "             ", font = timerFont1, fg = "#6e7a74", bg = "#6e7a74").grid(row = 1, column = 1)
+timer = Label(frame1, text = "00:00", font = timerFont1).grid(row = 3, column = 3, columnspan = 1, rowspan = 1, padx=10, pady=40)
+blankLabel1 = Label(frame1, text = "        ", font = timerFont1, fg = "#6e7a74", bg = "#6e7a74").grid(row = 1, column = 1)
+blankLabel2 = Label(frame1, text = "        ", font = timerFont1, fg = "#6e7a74", bg = "#6e7a74").grid(row = 2, column = 1)
 
+# Setting images for buttons:
+Start_btn = PhotoImage(file = 'media/Start_btn.png')
+Stop_btn = PhotoImage(file = 'media/Stop_btn.png')
+pomodoro_btn = PhotoImage(file = 'media/pomodoro_btn.png')
+custom_btn = PhotoImage(file = 'media/custom_btn.png')
 
 # Adding start and stop buttons
-startButton = Button(frame1, text = "START", font = buttonFont1, width = 18, height = 3).grid(row = 2, column = 2, padx=10, pady=10)
-stopButton = Button(frame1, text = "STOP", font = buttonFont1, width = 18, height = 3).grid(row = 2, column = 4, padx=10, pady=10)
+startButton = Button(frame1, image = Start_btn, borderwidth = 0).grid(row = 3, column = 2, padx=10, pady=10)
+stopButton = Button(frame1, text = "STOP", width = 18, height = 3).grid(row = 3, column = 4, padx=10, pady=10)
 
 # Adding navigate to statistics tab button:
 # navigateButton = Button(frame1, text = "To tab 2", command = select).grid(row = 1, column = 1, padx=10, pady=10)
