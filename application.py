@@ -63,6 +63,7 @@ blankLabel2 = Label(frame1, text = "        ", font = timerFont1, fg = "#6e7a74"
 
 # Setting images for buttons:
 Start_btn = PhotoImage(file = 'media/Start_btn.png')
+Start_btn.zoom(200, 200)
 Stop_btn = PhotoImage(file = 'media/Stop_btn.png')
 pomodoro_btn = PhotoImage(file = 'media/pomodoro_btn.png')
 custom_btn = PhotoImage(file = 'media/custom_btn.png')
