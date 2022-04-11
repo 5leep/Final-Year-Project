@@ -29,6 +29,11 @@ root.geometry(f'{appWidth}x{appHeight}+{int(x)}+{int(y)}')
 notebook = ttk.Notebook(root)
 notebook.pack(pady=15)
 
+# Assigning variables:
+minute = StringVar()
+minute.set("00")
+second = StringVar()
+second.set("00")
 
 # Go to Statistics tab function:
 def select():
@@ -62,9 +67,19 @@ Custom_btn = PhotoImage(file = 'media/Custom_btn.png')
 Base = PhotoImage(file = 'media/base.png')
 
 # Blank Labels:
-blankLabel1 = Label(frame1, text = "        ", font = timerFont1, fg = "#6e7a74", bg = "#6e7a74").grid(row = 1, column = 1)
-blankLabel2 = Label(frame1, text = "        ", font = timerFont1, fg = "#6e7a74", bg = "#6e7a74").grid(row = 2, column = 1)
-# blankLabel3 = Label(frame1, text = "        ", font = timerFont1, fg = "#6e7a74", bg = "#6e7a74").grid(row = 4, column = 2)
+blankLabel1 = Label(frame1, text = "        ", font = timerFont1, fg = "#707c74", bg = "#707c74").grid(row = 1, column = 1)
+blankLabel2 = Label(frame1, text = "        ", font = timerFont1, fg = "#707c74", bg = "#707c74").grid(row = 2, column = 1)
+# blankLabel3 = Label(frame1, text = "        ", font = timerFont1, fg = "#707c74", bg = "#707c74").grid(row = 4, column = 2)
+
+# Adding Timer Base:
+TimerBase = Label(frame1, image = Base, bg = '#707c74').grid(row = 3, column = 3, columnspan = 2, rowspan = 1, padx = 10, pady = 40)
+
+# Timer Label:
+timer = Label(frame1, text = ":", font = timerFont1, fg = 'White', bg = '#3b3838').grid(row = 3, column = 3, columnspan = 2, rowspan = 1, padx = 10, pady = 40)
+
+# Inputs:
+minuteEntry = Entry(frame1, width = 2, font = timerFont1, textvariable = minute).grid(row = 3, column = 3, sticky = "E", padx = 15)
+secondEntry = Entry(frame1, width = 2, font = timerFont1, textvariable = second).grid(row = 3, column = 4, sticky = "W", padx = 15)
 
 # Adding tab1 buttons:
 startButton = Button(frame1, image = Start_btn, borderwidth = 0).grid(row = 3, column = 2, padx = 10, pady = 10)
@@ -74,12 +89,6 @@ ThirtyMinsButton = Button(frame1, image = ThirtyMins_btn, borderwidth = 0).grid(
 OneHourButton = Button(frame1, image = OneHour_btn, borderwidth = 0).grid(row = 5, column = 3, padx = 10, pady = 10)
 PomodoroButton = Button(frame1, image = Pomodoro_btn, borderwidth = 0).grid(row = 5, column = 4, padx = 10, pady = 10)
 CustomButton = Button(frame1, image = Custom_btn, borderwidth = 0).grid(row = 5, column = 5, padx = 10, pady = 10)
-
-# Adding Timer Base:
-TimerBase = Label(frame1, image = Base, bg = '#707c74').grid(row = 3, column = 3, columnspan = 2, rowspan = 1, padx = 10, pady = 40)
-
-# Timer Label:
-timer = Label(frame1, text="00:00", font = timerFont1, fg = 'White', bg = '#3b3838').grid(row = 3, column = 3, columnspan = 2, rowspan = 1, padx = 10, pady = 40)
 
 # Adding navigate to statistics tab button:
 # navigateButton = Button(frame1, text = "To tab 2", command = select).grid(row = 1, column = 1, padx=10, pady=10)
