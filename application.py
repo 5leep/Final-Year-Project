@@ -37,6 +37,7 @@ notebook.pack(pady=15)
 
 global temp, secs
 
+
 # Go to Statistics tab function:
 def select():
     notebook.select(1)
@@ -67,11 +68,13 @@ OneHour_btn = PhotoImage(file='media/1hour_btn.png')
 Pomodoro_btn = PhotoImage(file='media/Pomodoro_btn.png')
 Custom_btn = PhotoImage(file='media/Custom_btn.png')
 Base = PhotoImage(file='media/base.png')
+Exit_btn = PhotoImage(file='media/exit_btn.png')
 
 # Blank Labels:
 blankLabel1 = Label(frame1, text="        ", font=timerFont1, fg="#707c74", bg="#707c74").grid(row=1, column=1)
 blankLabel2 = Label(frame1, text="        ", font=timerFont1, fg="#707c74", bg="#707c74").grid(row=2, column=1)
-# blankLabel3 = Label(frame1, text = "        ", font = timerFont1, fg = "#707c74", bg = "#707c74").grid(row = 4, column = 2)
+blankLabel2 = Label(frame1, text="        ", font=timerFont1, fg="#707c74", bg="#707c74").grid(row=6, column=1)
+
 
 # Adding Timer Base:
 TimerBase = Label(frame1, image=Base, bg='#707c74').grid(row=3, column=3, columnspan=2, rowspan=1, padx=10, pady=40)
@@ -88,11 +91,14 @@ second = StringVar()
 second.set("00")
 
 # Inputs:
-minuteEntry = Entry(frame1, width=2, font=timerFont1, textvariable=minute).grid(row=3, column=3, sticky="E", padx=15)
-secondEntry = Entry(frame1, width=2, font=timerFont1, textvariable=second).grid(row=3, column=4, sticky="W", padx=15)
+minuteEntry = Entry(frame1, width=2, font=timerFont1, textvariable=minute, fg="white", bg="#3b3838",
+                    borderwidth=0).grid(row=3, column=3, sticky="E", padx=15)
+secondEntry = Entry(frame1, width=2, font=timerFont1, textvariable=second, fg="white", bg="#3b3838",
+                    borderwidth=0).grid(row=3, column=4, sticky="W", padx=15)
+
 
 # Start function
-def start():
+def start1():
     global temp
     try:
         # the input provided by the user is
@@ -102,14 +108,14 @@ def start():
         print("Please input the right value")
     while temp > -1:
 
-        # divmod(firstvalue = temp//60, secondvalue = temp%60)
+        # divmod(first value = temp//60, second value = temp%60)
         mins, secs = divmod(temp, 60)
 
-        # Converting the input entered in mins or secs to hours,
-        # mins ,secs(input = 110 min --> 120*60 = 6600 => 1hr :
+        # Converting the input entered in mins or secs
+        # mins ,secs(input = 110 min --> 120*60 = 6600:
         # 50min: 0sec)
         if mins > 60:
-            # divmod(firstvalue = temp//60, secondvalue
+            # divmod(first value = temp//60, second value
             # = temp%60)
             hours, mins = divmod(mins, 60)
 
@@ -122,6 +128,7 @@ def start():
         # temp value every time
         root.update()
         time.sleep(1)
+
         # when temp value = 0; then a messagebox pop's up
         # with a message:"Time's up"
         if (temp == 0):
@@ -133,19 +140,26 @@ def start():
         # by one
         temp -= 1
 
+
 # Stop function:
 def stop():
     os.execl(sys.executable, sys.executable, *sys.argv)
 
+# Exit function:
+def exit():
+    root.destroy()
+
 
 # Adding tab1 buttons:
-startButton = Button(frame1, image=Start_btn, borderwidth=0, command=start).grid(row=3, column=2, padx=10, pady=10)
-stopButton = Button(frame1, image=Stop_btn, borderwidth=0, command=stop).grid(row=3, column=5, padx=10, pady=10)
+startButton = Button(frame1, image=Start_btn, borderwidth=0, command=start1, bg="#707c74", highlightthickness=0, bd=0).grid(row=3, column=2, padx=10, pady=10)
+stopButton = Button(frame1, image=Stop_btn, borderwidth=0, command=stop, bg="#707c74", highlightthickness=0, bd=0).grid(row=3, column=5, padx=10, pady=10)
 
-ThirtyMinsButton = Button(frame1, image=ThirtyMins_btn, borderwidth=0).grid(row=5, column=2, padx=10, pady=10)
-OneHourButton = Button(frame1, image=OneHour_btn, borderwidth=0).grid(row=5, column=3, padx=10, pady=10)
-PomodoroButton = Button(frame1, image=Pomodoro_btn, borderwidth=0).grid(row=5, column=4, padx=10, pady=10)
-CustomButton = Button(frame1, image=Custom_btn, borderwidth=0).grid(row=5, column=5, padx=10, pady=10)
+ThirtyMinsButton = Button(frame1, image=ThirtyMins_btn, bg="#707c74", highlightthickness=0, bd=0).grid(row=5, column=2, padx=10, pady=10)
+OneHourButton = Button(frame1, image=OneHour_btn, borderwidth=0, bg="#707c74", highlightthickness=0, bd=0).grid(row=5, column=3, padx=10, pady=10)
+PomodoroButton = Button(frame1, image=Pomodoro_btn, borderwidth=0, bg="#707c74", highlightthickness=0, bd=0).grid(row=5, column=4, padx=10, pady=10)
+CustomButton = Button(frame1, image=Custom_btn, borderwidth=0, bg="#707c74", highlightthickness=0, bd=0).grid(row=5, column=5, padx=10, pady=10)
+
+ExitButton = Button(frame1, image=Exit_btn, borderwidth=0, command=exit, bg="#707c74", highlightthickness=0, bd=0).grid(row=7, column=3, padx=10, pady=10, columnspan=2)
 
 # Adding navigate to statistics tab button:
 # navigateButton = Button(frame1, text = "To tab 2", command = select).grid(row = 1, column = 1, padx=10, pady=10)
