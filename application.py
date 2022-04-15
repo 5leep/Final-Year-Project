@@ -8,10 +8,14 @@ import tkinter.font as font
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
+from datetime import date
+import matplotlib.pyplot as plt
+import callback
+import pickle
+import os
+os.system("clr")
 
 # Begin "loop" of interface:
-import callback
-
 root = tk.Tk()
 root.title('FETT - Focus Enhancement and Tracking Tool')
 root.iconbitmap('media/fet.ico')
@@ -35,7 +39,14 @@ root.geometry(f'{appWidth}x{appHeight}+{int(x)}+{int(y)}')
 notebook = ttk.Notebook(root)
 notebook.pack(pady=15)
 
+# Preliminary variables:
 global temp, secs
+today = date.today()
+date = [today.strftime("%B %d, %Y")]
+
+# Print date:
+print("Today is:")
+print(date)
 
 
 # Go to Statistics tab function:
@@ -45,7 +56,7 @@ def select():
 
 # Creating tabs:
 frame1 = Frame(notebook, width=screenWidth, height=screenHeight, bg="#707c74")
-frame2 = Frame(notebook, width=screenWidth, height=screenHeight, bg="white")
+frame2 = Frame(notebook, width=screenWidth, height=screenHeight, bg="#807c74")
 
 # Packing tabs:
 frame1.pack(fill="both", expand=1)
@@ -73,7 +84,7 @@ Exit_btn = PhotoImage(file='media/exit_btn.png')
 # Blank Labels:
 blankLabel1 = Label(frame1, text="        ", font=timerFont1, fg="#707c74", bg="#707c74").grid(row=1, column=1)
 blankLabel2 = Label(frame1, text="        ", font=timerFont1, fg="#707c74", bg="#707c74").grid(row=2, column=1)
-blankLabel2 = Label(frame1, text="        ", font=timerFont1, fg="#707c74", bg="#707c74").grid(row=6, column=1)
+blankLabel3 = Label(frame1, text="        ", font=timerFont1, fg="#707c74", bg="#707c74").grid(row=6, column=1)
 
 
 # Adding Timer Base:
@@ -128,13 +139,16 @@ def start1():
         # temp value every time
         root.update()
         time.sleep(1)
-
-        # when temp value = 0; then a messagebox pop's up
-        # with a message:"Time's up"
         if (temp == 0):
-            messagebox.showinfo("Time Countdown", "Time's up ")
+            return
+
+        # when temp value = 0; then a messagebox pop's up with a message:
+        if (temp == 1):
+            messagebox.showinfo("FETT", "Time's up ")
             minute.set("00")
             second.set("00")
+
+            # User data update:
 
         # after every one sec the value of temp will be decremented
         # by one
@@ -164,9 +178,25 @@ ExitButton = Button(frame1, image=Exit_btn, borderwidth=0, command=exit, bg="#70
 # Adding navigate to statistics tab button:
 # navigateButton = Button(frame1, text = "To tab 2", command = select).grid(row = 1, column = 1, padx=10, pady=10)
 
-# Adding exit button:
-# exitButton = Button(frame1, width = 18, height = 3, padx=10, pady=10, text = "Exit", font = buttonFont1, command = root.quit).grid(row = 3, column = 4)
+# Creating and adding graphs on statistics:
+# x axis values
+x = [1, 2, 3]
+# corresponding y axis values
+y = [2, 4, 1]
 
+# plotting the points
+plt.plot(x, y)
+
+# naming the x axis
+plt.xlabel('x - axis')
+# naming the y axis
+plt.ylabel('y - axis')
+
+# giving a title to my graph
+plt.title('My first graph!')
+
+# function to show the plot
+plt.show()
 
 # End "loop" of interface:
 root.mainloop()
