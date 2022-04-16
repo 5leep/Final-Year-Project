@@ -9,10 +9,13 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from datetime import date
+import numpy as np
 import matplotlib.pyplot as plt
 import callback
 import pickle
 import os
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,
+NavigationToolbar2Tk)
 os.system("clr")
 
 # Begin "loop" of interface:
@@ -108,6 +111,14 @@ secondEntry = Entry(frame1, width=2, font=timerFont1, textvariable=second, fg="w
                     borderwidth=0).grid(row=3, column=4, sticky="W", padx=15)
 
 
+# Graph function:
+def graph():
+    house_prices = np.random.normal(200000, 25000, 5000)
+    plt.hist(house_prices, 50)
+    plt.grid()
+
+
+
 # Start function
 def start1():
     global temp
@@ -157,7 +168,9 @@ def start1():
 
 # Stop function:
 def stop():
-    os.execl(sys.executable, sys.executable, *sys.argv)
+    # os.execl(sys.executable, sys.executable, *sys.argv)
+    return graph()
+
 
 # Exit function:
 def exit():
@@ -178,25 +191,4 @@ ExitButton = Button(frame1, image=Exit_btn, borderwidth=0, command=exit, bg="#70
 # Adding navigate to statistics tab button:
 # navigateButton = Button(frame1, text = "To tab 2", command = select).grid(row = 1, column = 1, padx=10, pady=10)
 
-# Creating and adding graphs on statistics:
-# x axis values
-x = [1, 2, 3]
-# corresponding y axis values
-y = [2, 4, 1]
-
-# plotting the points
-plt.plot(x, y)
-
-# naming the x axis
-plt.xlabel('x - axis')
-# naming the y axis
-plt.ylabel('y - axis')
-
-# giving a title to my graph
-plt.title('My first graph!')
-
-# function to show the plot
-plt.show()
-
-# End "loop" of interface:
 root.mainloop()
