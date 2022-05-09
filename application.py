@@ -93,11 +93,9 @@ class App(tk.Tk):
 
         # Adding Frames in all tabs
         self.frame1 = Frame(self.tab1, bg="#333333")
-        self.frame1.grid(row=0, column=0, sticky="snew",
-                         padx=(20, 20), pady=(20, 150))
+        self.frame1.grid(row=0, column=0, sticky="snew", padx=(20, 20), pady=(20, 150))
         self.frame2 = Frame(self.tab2, bg="#807c74")
-        self.frame2.grid(row=0, column=0, sticky="snew",
-                         padx=(20, 20), pady=(20, 100))
+        self.frame2.grid(row=0, column=0, sticky="snew", padx=(20, 20), pady=(20, 100))
         self.frame3 = Frame(self.tab3, bg="#707c74")
         self.frame3.grid(row=0, column=0, sticky="snew", padx=(20, 20))
         self.frame4 = Frame(self.tab4, bg="#ffffff")
@@ -108,6 +106,7 @@ class App(tk.Tk):
         # Setting up fonts:
         self.buttonFont2 = font.Font(family='Helvetica', size=10)
         self.timerFont1 = font.Font(family='Calibri', size=40, weight='bold')
+        self.userFont1 = font.Font(family='Helvetica', size=25, weight='bold')
 
         # Setting images for buttons and labels:
         self.startButton = PhotoImage(file='media/Start_btn.png')
@@ -126,14 +125,11 @@ class App(tk.Tk):
         self.frame1.columnconfigure(0, weight=1)
 
         # User Registration Page
-        Label(self.frame1, text="Enter Your Name to Register", font=self.timerFont1, bg="#333333",
-              fg="Black").grid(row=0, column=0, sticky='s')
+        Label(self.frame1, text="Enter Your Name to Register", font=self.userFont1, bg="#333333", fg="Black").grid(row=0, column=0, sticky='s')
         self.userRegister = StringVar()
-        self.registerEntry = Entry(self.frame1, textvariable=self.userRegister, bd=5, relief=SUNKEN,
-                                   font="Helvetica 20 bold", fg="Black")
+        self.registerEntry = Entry(self.frame1, textvariable=self.userRegister, bd=5, relief=SUNKEN, font="Helvetica 20 bold", fg="Black")
         self.registerEntry.grid(row=1, column=0)
-        Button(self.frame1, image=self.nextButton, bg="#333333",
-               fg="Black", borderwidth=0, command=self.register).grid(row=2, column=0, sticky='n')
+        Button(self.frame1, image=self.nextButton, bg="#333333", fg="Black", borderwidth=0, command=self.register).grid(row=2, column=0, sticky='n')
         self.user = self.registerEntry.get()
 
         # Configuring Rows and Columns for Login Page
@@ -142,15 +138,11 @@ class App(tk.Tk):
         self.frame2.columnconfigure(0, weight=1)
 
         # User Login Page
-        Label(self.frame2, text="Please Enter Your Name", font=self.timerFont1, bg="#807c74",
-              fg="Black").grid(row=0, column=0, sticky='s')
+        Label(self.frame2, text="Please Enter Your Name", font=self.userFont1, bg="#807c74", fg="Black").grid(row=0, column=0, sticky='s')
         self.userLogin = StringVar()
-        Entry(self.frame2, textvariable=self.userLogin, bd=5, relief=SUNKEN,
-              font="Helvetica 20 bold", fg="Black").grid(row=1, column=0)
-        Button(self.frame2, image=self.nextButton, bg="#807c74",
-               fg="Black", borderwidth=0, command=self.login).grid(row=2, column=0)
-        Button(self.frame2, image=self.exitButton, borderwidth=0,
-               bg="#707c74", highlightthickness=0, bd=0, command=self.exit).grid(row=3, column=0, sticky="n")
+        Entry(self.frame2, textvariable=self.userLogin, bd=5, relief=SUNKEN, font="Helvetica 20 bold", fg="Black").grid(row=1, column=0)
+        Button(self.frame2, image=self.nextButton, bg="#807c74", fg="Black", borderwidth=0, command=self.login).grid(row=2, column=0)
+        Button(self.frame2, image=self.exitButton, borderwidth=0, bg="#707c74", highlightthickness=0, bd=0, command=self.exit).grid(row=3, column=0, sticky="n")
 
         # Configuring Rows and Columns for Timer Page
         for i in range(3):
@@ -165,22 +157,14 @@ class App(tk.Tk):
 
         # Timer Page Widgets:
 
-        Label(self.frame3, image=self.baseLabel, bg="#707c74").grid(
-            row=0, column=1, columnspan=2)
-        Button(self.frame3, image=self.startButton, command=self.start, bg="#707c74", borderwidth=0).grid(
-            row=0, column=0)
-        Button(self.frame3, image=self.stopButton, command=self.stop, bg="#707c74", borderwidth=0).grid(
-            row=0, column=3)
-        Button(self.frame3, image=self.thirtyMinButton, command=self.thirtyMin, bg="#707c74", borderwidth=0).grid(
-            row=1, column=0)
-        Button(self.frame3, image=self.oneHourButton, command=self.oneHour, bg="#707c74", borderwidth=0).grid(
-            row=1, column=1)
-        Button(self.frame3, image=self.pomodoroButton, command=self.pomodoro, bg="#707c74", borderwidth=0).grid(
-            row=1, column=2)
-        Button(self.frame3, image=self.customButton, command=self.custom, bg="#707c74", borderwidth=0).grid(
-            row=1, column=3)
-        Button(self.frame3, image=self.exitButton, bg="#707c74", borderwidth=0, command=self.exit).grid(
-            row=2, column=1, columnspan=2)
+        Label(self.frame3, image=self.baseLabel, bg="#707c74").grid(row=0, column=1, columnspan=2)
+        Button(self.frame3, image=self.startButton, command=self.start, bg="#707c74", borderwidth=0).grid(row=0, column=0)
+        Button(self.frame3, image=self.stopButton, command=self.stop, bg="#707c74", borderwidth=0).grid(row=0, column=3)
+        Button(self.frame3, image=self.thirtyMinButton, command=self.thirtyMin, bg="#707c74", borderwidth=0).grid(row=1, column=0)
+        Button(self.frame3, image=self.oneHourButton, command=self.oneHour, bg="#707c74", borderwidth=0).grid(row=1, column=1)
+        Button(self.frame3, image=self.pomodoroButton, command=self.pomodoro, bg="#707c74", borderwidth=0).grid(row=1, column=2)
+        Button(self.frame3, image=self.customButton, command=self.custom, bg="#707c74", borderwidth=0).grid(row=1, column=3)
+        Button(self.frame3, image=self.exitButton, bg="#707c74", borderwidth=0, command=self.exit).grid(row=2, column=1, columnspan=2)
 
         # Assigning variables:
 
@@ -189,19 +173,12 @@ class App(tk.Tk):
         self.second = StringVar()
         self.second.set("00")
 
-        self.minuteEntry = Entry(self.frame3, width=2, font=self.timerFont1,
-                                 textvariable=self.minute, fg="white", bg="#3b3838",
-                                 borderwidth=0).grid(row=0, column=1, sticky="E", padx=15)
-        self.secondEntry = Entry(self.frame3, width=2, font=self.timerFont1,
-                                 textvariable=self.second, fg="white", bg="#3b3838",
-                                 borderwidth=0).grid(row=0, column=2, sticky="W", padx=15)
-        Label(self.frame3, text=":", fg="#ffffff", bg="#3b3838", font=self.timerFont1).grid(
-            row=0, column=1, columnspan=2, pady=(0, 8))
+        self.minuteEntry = Entry(self.frame3, width=2, font=self.timerFont1, textvariable=self.minute, fg="white", bg="#3b3838", borderwidth=0).grid(row=0, column=1, sticky="E", padx=15)
+        self.secondEntry = Entry(self.frame3, width=2, font=self.timerFont1, textvariable=self.second, fg="white", bg="#3b3838", borderwidth=0).grid(row=0, column=2, sticky="W", padx=15)
+        Label(self.frame3, text=":", fg="#ffffff", bg="#3b3838", font=self.timerFont1).grid(row=0, column=1, columnspan=2, pady=(0, 8))
 
-        self.pointsFrame = Frame(self.frame3, bg="#707c74",
-                                 highlightbackground="#000000", highlightthickness=2)
-        self.pointsFrame.grid(row=0, column=4, rowspan=3,
-                              sticky="snew", pady=(80, 80))
+        self.pointsFrame = Frame(self.frame3, bg="#707c74", highlightbackground="#000000", highlightthickness=2)
+        self.pointsFrame.grid(row=0, column=4, rowspan=3, sticky="snew", pady=(80, 80))
 
         # Configuring Rows and Columns for Points Frame:
 
@@ -209,14 +186,10 @@ class App(tk.Tk):
             self.pointsFrame.rowconfigure(i, weight=1)
         self.pointsFrame.columnconfigure(0, weight=1)
 
-        Label(self.pointsFrame, text="Points", fg="#000000", bg="#707c74", font=self.timerFont1).grid(
-            row=0, column=0, sticky='s')
-        Label(self.pointsFrame, text=self.point, fg="#000000", bg="#707c74", font=self.timerFont1).grid(
-            row=1, column=0, sticky='n')
-        Label(self.pointsFrame, text="Level", fg="#000000", bg="#707c74", font=self.timerFont1).grid(
-            row=2, column=0, sticky='s')
-        Label(self.pointsFrame, text=self.level, fg="#000000", bg="#707c74", font=self.timerFont1).grid(
-            row=3, column=0, sticky='n')
+        Label(self.pointsFrame, text="Points", fg="#000000", bg="#707c74", font=self.timerFont1).grid(row=0, column=0, sticky='s')
+        Label(self.pointsFrame, text=self.point, fg="#000000", bg="#707c74", font=self.timerFont1).grid(row=1, column=0, sticky='n')
+        Label(self.pointsFrame, text="Level", fg="#000000", bg="#707c74", font=self.timerFont1).grid(row=2, column=0, sticky='s')
+        Label(self.pointsFrame, text=self.level, fg="#000000", bg="#707c74", font=self.timerFont1).grid(row=3, column=0, sticky='n')
 
         # Statistics Page Widgets
         self.figure, (self.points_ax, self.time_spent_ax) = plt.subplots(1, 2)
@@ -342,9 +315,9 @@ class App(tk.Tk):
                     points += 1
                 self.point += points
                 temp = self.point
-                while temp > 89:
+                while temp > 59:
                     self.level += 1
-                    temp -= 90
+                    temp -= 60
                 self.changePoints()
                 self.userId = self.userDB.get_user_id(self.user)
                 self.currentDate = datetime.now().strftime("%Y-%m-%d")
@@ -361,15 +334,13 @@ class App(tk.Tk):
                 self.plot_data()
                 return
 
-            # Incrementing level every 90 self.point:
+            # Incrementing level every 60 self.point:
             self.temp -= 1
             self.time_incremented += 1
 
     def changePoints(self):
-        Label(self.pointsFrame, text=self.point, fg="#000000", bg="#707c74", font=self.timerFont1).grid(
-            row=1, column=0, sticky='n')
-        Label(self.pointsFrame, text=self.level, fg="#000000", bg="#707c74", font=self.timerFont1).grid(
-            row=3, column=0, sticky='n')
+        Label(self.pointsFrame, text=self.point, fg="#000000", bg="#707c74", font=self.timerFont1).grid(row=1, column=0, sticky='n')
+        Label(self.pointsFrame, text=self.level, fg="#000000", bg="#707c74", font=self.timerFont1).grid(row=3, column=0, sticky='n')
 
     def stop(self):
         self.terminate = 1
