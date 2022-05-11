@@ -1,5 +1,6 @@
 import sqlite3
 
+
 class UsersDataBase:
     def __init__(self):
         self.conn = sqlite3.connect('timer.sqlite')
@@ -59,6 +60,27 @@ class TimerDatabase:
             dataList.append(a)
 
         return dataList[0], dataList[1], dataList[-1]
+
+    def get_users_points_till_now(self, personID):
+        results = self.cur.execute(
+            "SELECT points FROM TimerRecord WHERE personID = (?)", [personID])
+
+        points = []
+        for point in results:
+            points.append(point[0])
+
+        return sum(points)
+
+    def get_users_level(self, personID):
+        try:
+            results = self.cur.execute(
+                "SELECT level FROM TimerRecord WHERE personID = (?) ORDER BY level DESC limit 1", [personID])
+
+            return list(results)[0][0]
+        except:
+            return 0
+
+
 
 
 def main():

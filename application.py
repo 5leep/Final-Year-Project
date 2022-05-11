@@ -63,7 +63,7 @@ class App(tk.Tk):
 
         # Creating tabs:
         self.tab1 = Frame(self.notebook, bg="#333333")
-        self.tab2 = Frame(self.notebook, bg="#807c74")
+        self.tab2 = Frame(self.notebook, bg="#333333")
         self.tab3 = Frame(self.notebook, bg="#707c74")
         self.tab4 = Frame(self.notebook, bg="#ffffff")
 
@@ -94,7 +94,7 @@ class App(tk.Tk):
         # Adding Frames in all tabs
         self.frame1 = Frame(self.tab1, bg="#333333")
         self.frame1.grid(row=0, column=0, sticky="snew", padx=(20, 20), pady=(20, 150))
-        self.frame2 = Frame(self.tab2, bg="#807c74")
+        self.frame2 = Frame(self.tab2, bg="#333333")
         self.frame2.grid(row=0, column=0, sticky="snew", padx=(20, 20), pady=(20, 100))
         self.frame3 = Frame(self.tab3, bg="#707c74")
         self.frame3.grid(row=0, column=0, sticky="snew", padx=(20, 20))
@@ -125,7 +125,7 @@ class App(tk.Tk):
         self.frame1.columnconfigure(0, weight=1)
 
         # User Registration Page
-        Label(self.frame1, text="Enter Your Name to Register", font=self.userFont1, bg="#333333", fg="Black").grid(row=0, column=0, sticky='s')
+        Label(self.frame1, text="Enter Your Name to Register", font=self.userFont1, bg="#333333", fg="White").grid(row=0, column=0, pady=10)
         self.userRegister = StringVar()
         self.registerEntry = Entry(self.frame1, textvariable=self.userRegister, bd=5, relief=SUNKEN, font="Helvetica 20 bold", fg="Black")
         self.registerEntry.grid(row=1, column=0)
@@ -138,10 +138,10 @@ class App(tk.Tk):
         self.frame2.columnconfigure(0, weight=1)
 
         # User Login Page
-        Label(self.frame2, text="Please Enter Your Name", font=self.userFont1, bg="#807c74", fg="Black").grid(row=0, column=0, sticky='s')
+        Label(self.frame2, text="Please Enter Your Name", font=self.userFont1, bg="#333333", fg="White").grid(row=0, column=0, pady=10)
         self.userLogin = StringVar()
         Entry(self.frame2, textvariable=self.userLogin, bd=5, relief=SUNKEN, font="Helvetica 20 bold", fg="Black").grid(row=1, column=0)
-        Button(self.frame2, image=self.nextButton, bg="#807c74", fg="Black", borderwidth=0, command=self.login).grid(row=2, column=0)
+        Button(self.frame2, image=self.nextButton, bg="#807c74", fg="Black", borderwidth=0, highlightthickness=0, command=self.login).grid(row=2, column=0)
         Button(self.frame2, image=self.exitButton, borderwidth=0, bg="#707c74", highlightthickness=0, bd=0, command=self.exit).grid(row=3, column=0, sticky="n")
 
         # Configuring Rows and Columns for Timer Page
@@ -158,13 +158,13 @@ class App(tk.Tk):
         # Timer Page Widgets:
 
         Label(self.frame3, image=self.baseLabel, bg="#707c74").grid(row=0, column=1, columnspan=2)
-        Button(self.frame3, image=self.startButton, command=self.start, bg="#707c74", borderwidth=0).grid(row=0, column=0)
-        Button(self.frame3, image=self.stopButton, command=self.stop, bg="#707c74", borderwidth=0).grid(row=0, column=3)
-        Button(self.frame3, image=self.thirtyMinButton, command=self.thirtyMin, bg="#707c74", borderwidth=0).grid(row=1, column=0)
-        Button(self.frame3, image=self.oneHourButton, command=self.oneHour, bg="#707c74", borderwidth=0).grid(row=1, column=1)
-        Button(self.frame3, image=self.pomodoroButton, command=self.pomodoro, bg="#707c74", borderwidth=0).grid(row=1, column=2)
-        Button(self.frame3, image=self.customButton, command=self.custom, bg="#707c74", borderwidth=0).grid(row=1, column=3)
-        Button(self.frame3, image=self.exitButton, bg="#707c74", borderwidth=0, command=self.exit).grid(row=2, column=1, columnspan=2)
+        Button(self.frame3, image=self.startButton, command=self.start, bg="#707c74", borderwidth=0).grid(row=0, column=0, padx=10)
+        Button(self.frame3, image=self.stopButton, command=self.stop, bg="#707c74", borderwidth=0).grid(row=0, column=3, padx=10)
+        Button(self.frame3, image=self.thirtyMinButton, command=self.thirtyMin, bg="#707c74", borderwidth=0).grid(row=1, column=0, padx=10)
+        Button(self.frame3, image=self.oneHourButton, command=self.oneHour, bg="#707c74", borderwidth=0).grid(row=1, column=1, padx=10)
+        Button(self.frame3, image=self.pomodoroButton, command=self.pomodoro, bg="#707c74", borderwidth=0).grid(row=1, column=2, padx=5)
+        Button(self.frame3, image=self.customButton, command=self.custom, bg="#707c74", borderwidth=0).grid(row=1, column=3, padx=5)
+        Button(self.frame3, image=self.exitButton, bg="#707c74", borderwidth=0, command=self.exit).grid(row=2, column=1, columnspan=2, padx=5)
 
         # Assigning variables:
 
@@ -216,6 +216,14 @@ class App(tk.Tk):
         else:
             messagebox.showerror("ERROR", "INVALID USER")
             return
+
+        self.point = self.timeDB.get_users_points_till_now(self.userDB.get_user_id(self.user))
+        self.level = self.timeDB.get_users_level(self.userDB.get_user_id(self.user))
+        self.changePoints()
+
+        print("POINT", self.point)
+        print("LEVEL", self.level)
+
         self.notebook.add(self.tab3)
         self.notebook.add(self.tab4)
         self.notebook.select(self.tab3)
@@ -261,7 +269,7 @@ class App(tk.Tk):
                 self.update()
             except:
                 self.temp = -1
-            time.sleep(1)
+            time.sleep(0.001)
 
             if self.terminate == 1:
                 self.mins, self.secs, self.hours = 0, 0, 0
@@ -314,10 +322,12 @@ class App(tk.Tk):
                     temp1 -= 60
                     points += 1
                 self.point += points
-                temp = self.point
-                while temp > 59:
+                self.level_of_current_session += points
+                self.point_of_current_session = 0
+
+                while self.level_of_current_session > 59:
                     self.level += 1
-                    temp -= 60
+                    self.level_of_current_session -= 60
                 self.changePoints()
                 self.userId = self.userDB.get_user_id(self.user)
                 self.currentDate = datetime.now().strftime("%Y-%m-%d")
@@ -337,6 +347,7 @@ class App(tk.Tk):
             # Incrementing level every 60 self.point:
             self.temp -= 1
             self.time_incremented += 1
+            print(self.temp)
 
     def changePoints(self):
         Label(self.pointsFrame, text=self.point, fg="#000000", bg="#707c74", font=self.timerFont1).grid(row=1, column=0, sticky='n')
@@ -358,10 +369,10 @@ class App(tk.Tk):
         self.second.set("00")
 
     def custom(self):
-        self.minute.set("15")
+        self.minute.set("10")
         self.second.set("00")
         messagebox.showinfo(
-            "Enter Time", "Please Set You Timer In The Clock, Thank you!")
+            "Enter Time", "Please set the time in the clock.")
 
     def exit(self):
         self.destroy()
