@@ -154,6 +154,8 @@ class App(tk.Tk):
 
         self.point = 0
         self.level = 0
+        self.level_of_current_session = 0
+        self.point_of_current_session = 0
 
         # Timer Page Widgets:
 
@@ -269,7 +271,7 @@ class App(tk.Tk):
                 self.update()
             except:
                 self.temp = -1
-            time.sleep(0.001)
+            time.sleep(1)
 
             if self.terminate == 1:
                 self.mins, self.secs, self.hours = 0, 0, 0
